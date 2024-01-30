@@ -35,12 +35,12 @@ jobs:
       - name: Create the PR branch
         run: git checkout -b sync-main-pr-${{ env.PR_ID }}
 
-      - name: Merge upstream/main branch
+      - name: Merge main-apache branch
         run: git merge --no-edit origin/main-apache
 
       - name: Check for changes
         id: check_changes
-        run: echo "::set-output name=is_changed::$(git diff --quiet)"
+        run: echo "is_changed=$(git diff --quiet)" >> $GITHUB_OUTPUT
 
       - name: Push changes
         if: steps.check_changes.outputs.is_changed == '1'
