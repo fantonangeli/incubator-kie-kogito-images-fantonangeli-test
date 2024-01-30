@@ -3,10 +3,9 @@ name: Create a PR to sync main branch with main-apache
 env:
   USERNAME: kie-ci
   USEREMAIL: kie-ci0@redhat.com
-  PR_ID: $RANDOM
 
 on:
-  schedule:
+  # schedule:
     #- cron: "0 0 * * *" # every day at midnight
   workflow_dispatch:
 
@@ -50,3 +49,4 @@ jobs:
       - name: Create the PR
         if: steps.check_changes.outputs.is_changed == '1'
         run: gh pr create --title "Automatic PR: Sync main with main-apache - (${PR_ID})" --body "This PR synchronizes the main branch with main-apache."
+
