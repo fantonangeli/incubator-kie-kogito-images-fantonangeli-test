@@ -48,5 +48,6 @@ jobs:
 
       - name: Create the PR
         if: steps.check_changes.outputs.is_changed == '1'
-        run: gh pr create --title "Automatic PR: Sync main with main-apache - (${PR_ID})" --body "This PR synchronizes the main branch with main-apache."
+        run: |
+            gh pr create --title "Automatic PR: Sync main with main-apache - (${PR_ID})" --body "This PR synchronizes the main branch with main-apache."
 
