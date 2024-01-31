@@ -22,7 +22,6 @@ setup_file() {
     export KOGITO_HOME=/tmp/kogito
     export HOME="${KOGITO_HOME}"
     export SONATAFLOW_DEPLOYMENT_WEBAPP_VERSION="0.32.0"
-    export MAVEN_VERSION="3.9.3"
 
     export PROJECT_ARTIFACT_ID='serverless-workflow-project'
     export PROJECT_DIR="${KOGITO_HOME}/${PROJECT_ARTIFACT_ID}"
