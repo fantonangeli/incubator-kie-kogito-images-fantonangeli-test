@@ -54,8 +54,8 @@ setup_file() {
     source ${KOGITO_HOME}/launch/configure-maven.sh
 
     cd "${KOGITO_HOME}" 
+    sudo apt-get install maven
     "${MAVEN_HOME}"/bin/mvn -v
-    exit 0
     source ${KOGITO_HOME}/launch/create-app.sh
 
     source ${KOGITO_HOME}/launch/build-app.sh
