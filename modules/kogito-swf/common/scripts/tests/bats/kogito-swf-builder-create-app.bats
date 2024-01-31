@@ -18,6 +18,7 @@
 # under the License.
 #
 
+setup_file() {
     export KOGITO_HOME=/tmp/kogito
     export HOME="${KOGITO_HOME}"
     export SONATAFLOW_DEPLOYMENT_WEBAPP_VERSION="0.32.0"
@@ -33,6 +34,7 @@
     cp $BATS_TEST_DIRNAME/../../../../../kogito-maven/common/maven/settings.xml ${HOME}/.m2/
     export MAVEN_SETTINGS_PATH="${HOME}/.m2/settings.xml"
     export JBOSS_CONTAINER_JAVA_JVM_MODULE=${KOGITO_HOME}/launch
+    export MAVEN_VERSION="3.9.3"
 
     mkdir -p "${KOGITO_HOME}"/launch
 
@@ -50,13 +52,19 @@
     cp $BATS_TEST_DIRNAME/../../added/build-app.sh "${KOGITO_HOME}"/launch/
     cp $BATS_TEST_DIRNAME/../../added/add-sonataflow-deployment-webapp.sh "${KOGITO_HOME}"/launch/
 
+    cd "${KOGITO_HOME}" 
+
+    export MAVEN_HOME="${KOGITO_HOME}"/apache-maven-${MAVEN_VERSION}
+    wget https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+    tar -xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz 
+
     source ${KOGITO_HOME}/launch/configure-maven.sh
 
-    cd "${KOGITO_HOME}" 
     "${MAVEN_HOME}"/bin/mvn -v
     source ${KOGITO_HOME}/launch/create-app.sh
 
     source ${KOGITO_HOME}/launch/build-app.sh
+}
 
 teardown_file() {
     rm -rf "${KOGITO_HOME}"
