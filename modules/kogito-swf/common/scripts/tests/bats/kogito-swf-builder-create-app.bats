@@ -59,7 +59,7 @@ setup_file() {
     source ${KOGITO_HOME}/launch/configure-maven.sh
 
     prepareEnv
-    ignore_maven_self_signed_certificates
+    configure
 
     cd "${KOGITO_HOME}" 
     source ${KOGITO_HOME}/launch/create-app.sh
