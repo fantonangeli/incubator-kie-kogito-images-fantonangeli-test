@@ -58,6 +58,8 @@ setup_file() {
     source ${KOGITO_HOME}/launch/jvm-settings.sh
     source ${KOGITO_HOME}/launch/configure-maven.sh
 
+    prepareEnv
+
     cd "${KOGITO_HOME}" 
     source ${KOGITO_HOME}/launch/create-app.sh
 
