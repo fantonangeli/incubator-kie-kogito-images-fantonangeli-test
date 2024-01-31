@@ -58,6 +58,8 @@ setup_file() {
     TEMPD=$(mktemp -d)
     cp -r $BATS_TEST_DIRNAME/../../../../../../tests/shell/kogito-swf-builder/resources/greet-with-inputschema/* ${TEMPD}
 
+    rm -r ${HOME}/.m2/
+
     # We don't care about the errors to try to execute and build the program, just the copy matters
     source ${KOGITO_HOME}/launch/build-app.sh ${TEMPD} || true
 }
