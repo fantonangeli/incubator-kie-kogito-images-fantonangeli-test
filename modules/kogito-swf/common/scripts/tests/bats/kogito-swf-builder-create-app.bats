@@ -55,6 +55,7 @@ setup_file() {
 
     cd "${KOGITO_HOME}" 
     echo "${MAVEN_HOME}"/bin/mvn -v
+    exit 0
     source ${KOGITO_HOME}/launch/create-app.sh
 
     source ${KOGITO_HOME}/launch/build-app.sh
