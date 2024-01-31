@@ -32,7 +32,12 @@ setup_file() {
     mkdir -p ${HOME}/.m2/
     cp $BATS_TEST_DIRNAME/../../../../../kogito-maven/common/maven/settings.xml ${HOME}/.m2/
     export MAVEN_SETTINGS_PATH="${HOME}/.m2/settings.xml"
-    export JBOSS_CONTAINER_JAVA_JVM_MODULE=${KOGITO_HOME}/launch
+    # export JBOSS_CONTAINER_JAVA_JVM_MODULE=${KOGITO_HOME}/launch
+
+    export JBOSS_CONTAINER_JAVA_JVM_MODULE=/tmp/container/java/jvm
+    mkdir -p "${JBOSS_CONTAINER_JAVA_JVM_MODULE}"
+    cp -r $BATS_TEST_DIRNAME/../../../../../kogito-dynamic-resources/added/* "${JBOSS_CONTAINER_JAVA_JVM_MODULE}"/
+    chmod -R +x "${JBOSS_CONTAINER_JAVA_JVM_MODULE}"
 
     mkdir -p "${KOGITO_HOME}"/launch
 
@@ -50,15 +55,14 @@ setup_file() {
     cp $BATS_TEST_DIRNAME/../../added/build-app.sh "${KOGITO_HOME}"/launch/
     cp $BATS_TEST_DIRNAME/../../added/add-sonataflow-deployment-webapp.sh "${KOGITO_HOME}"/launch/
 
-    # source ${KOGITO_HOME}/launch/configure-maven.sh
+    source ${KOGITO_HOME}/launch/jvm-settings.sh
+    source ${KOGITO_HOME}/launch/configure-maven.sh
 
     cd "${KOGITO_HOME}" 
     source ${KOGITO_HOME}/launch/create-app.sh
 
     TEMPD=$(mktemp -d)
     cp -r $BATS_TEST_DIRNAME/../../../../../../tests/shell/kogito-swf-builder/resources/greet-with-inputschema/* ${TEMPD}
-
-    rm -r ${HOME}/.m2/
 
     # We don't care about the errors to try to execute and build the program, just the copy matters
     source ${KOGITO_HOME}/launch/build-app.sh ${TEMPD} || true
