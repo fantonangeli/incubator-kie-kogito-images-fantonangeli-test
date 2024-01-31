@@ -51,10 +51,9 @@ setup_file() {
     cp $BATS_TEST_DIRNAME/../../added/build-app.sh "${KOGITO_HOME}"/launch/
     cp $BATS_TEST_DIRNAME/../../added/add-sonataflow-deployment-webapp.sh "${KOGITO_HOME}"/launch/
 
-    source ${KOGITO_HOME}/launch/configure-maven.sh
+    # source ${KOGITO_HOME}/launch/configure-maven.sh
 
     cd "${KOGITO_HOME}" 
-    sudo apt-get install maven
     "${MAVEN_HOME}"/bin/mvn -v
     source ${KOGITO_HOME}/launch/create-app.sh
 
